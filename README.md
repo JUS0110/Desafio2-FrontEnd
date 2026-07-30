@@ -2,12 +2,14 @@
 Desenvolvimento de uma vitrine de receitas para o desafio 2 do Onboarding de projetos da Seed a Bit Tecnologia.
 
 # 🏗️Estrutura do projeto
+```
 app/
 ├── layout.tsx         # Layout global com Header e Footer
 ├── page.tsx           # Landing Page (Server Component)
 └── explorar/
     ├── page.tsx       # Vitrine Paginada (Server Component)
     └── loading.tsx    # Feedback visual de carregamento
+```
 
 [] Header com navegação (<Link href="/explorar">);
 [] Hero section explicando a proposta do projeto;
