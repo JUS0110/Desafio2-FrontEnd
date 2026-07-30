@@ -1,4 +1,4 @@
-# 📖ShelfReceitas
+# 📖NextRecipe
 Desenvolvimento de uma vitrine de receitas para o desafio 2 do Onboarding de projetos da Seed a Bit Tecnologia.
 
 # 🏗️Estrutura do projeto
