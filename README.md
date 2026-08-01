@@ -17,12 +17,12 @@ app/
     └── loading.tsx    # Feedback visual de carregamento
 ```
 ```
-[] Header com navegação (<Link href="/explorar">);
-[] Hero section explicando a proposta do projeto;
-[] Botão de Call to Action (CTA) direcionando para a rota /explorar;
-[] Componente de Filtro/Busca ('use client');
-[] Grid de Cards reutilizáveis (renderizados a partir dos dados da API);
-[] Controles de Paginação ("Anterior" e "Próximo" vinculados ao searchParams).
+[x] Header com navegação (<Link href="/explorar">);
+[x] Hero section explicando a proposta do projeto;
+[x] Botão de Call to Action (CTA) direcionando para a rota /explorar;
+[x] Componente de Filtro/Busca ('use client');
+[x] Grid de Cards reutilizáveis (renderizados a partir dos dados da API);
+[x] Controles de Paginação ("Anterior" e "Próximo" vinculados ao searchParams).
 ```
 
 # Perguntas de reflexão
