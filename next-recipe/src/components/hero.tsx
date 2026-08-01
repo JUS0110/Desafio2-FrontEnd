@@ -5,7 +5,7 @@ export default function Hero() {
     <section className="flex flex-col items-center justify-center text-center py-24">
 
       <h1 className="text-6xl font-bold mb-6">
-        Descubra receitas incríveis 🍳
+        A sua próxima receita está aqui! 🍳
       </h1>
 
       <p className="text-xl max-w-xl mb-8">

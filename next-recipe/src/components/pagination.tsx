@@ -2,28 +2,36 @@ import Link from "next/link";
 
 type PaginationProps = {
   currentPage: number;
+  totalPages: number;
 };
 
 export default function Pagination({
   currentPage,
+  totalPages,
 }: PaginationProps) {
   return (
-
     <section className="flex justify-between mt-10">
 
-      <Link href={`/explorar?page=${currentPage - 1}`}>
-        ← Anterior
-      </Link>
+      {currentPage > 1 ? (
+        <Link href={`/explorar?page=${currentPage - 1}`}>
+          ← Anterior
+        </Link>
+      ) : (
+        <div />
+      )}
 
       <span>
-        Página {currentPage}
+        Página {currentPage} de {totalPages}
       </span>
 
-      <Link href={`/explorar?page=${currentPage + 1}`}>
-        Próximo →
-      </Link>
+      {currentPage < totalPages ? (
+        <Link href={`/explorar?page=${currentPage + 1}`}>
+          Próximo →
+        </Link>
+      ) : (
+        <div />
+      )}
 
     </section>
-
   );
 }
