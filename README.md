@@ -5,9 +5,9 @@
 
 # NextRecipe
 
-Desenvolvimento de uma vitrine de receitas para o desafio 2 do Onboarding de projetos da Seed a Bit Tecnologia.
+Desenvolvimento de um site de receitas para o desafio 2 do Onboarding de projetos da Seed a Bit Tecnologia.
 
-# Estrutura do projeto
+# Estrutura básica do projeto
 ```
 app/
 ├── layout.tsx         # Layout global com Header e Footer
@@ -25,25 +25,71 @@ app/
 [x] Controles de Paginação ("Anterior" e "Próximo" vinculados ao searchParams).
 ```
 
-# Perguntas de reflexão
-1. *Por que a busca inicial dos dados na rota `/explorar` foi feita em um Server Component em vez de um Client Component?*
-2. *Se precisarmos adicionar um botão de "Curtir / Favoritar" dentro de cada Card da vitrine, como você estruturaria esse componente mantendo a performance da aplicação?*
-3. Em sua implementação, como você usou o useState e useEffect? Como eles impactam as renderizações do sistema?
-4. Quais métodos HTTP foram utilizados e por que o projeto utiliza principalmente o método `GET`?
-5. Foram usadas variáveis centralizadas no código? Como você implementou isso?
-6. Como a aplicação se adapta a telas de celular, tablet e desktop? Quais mecanismos você utilizou para isso?
-7. O filtro é aplicado apenas aos itens da página atual ou a todos os itens disponíveis na API?
+# Detalhes do desenvolvimento
+- A busca inicial dos dados foi feita em um Server Component porque o Next.js permite que a requisição seja executada no servidor antes da página ser enviada ao navegador. Isso traz algumas vantagens:
+Melhor performance: os dados já chegam renderizados ao usuário, reduzindo o trabalho do navegador.
+Menor JavaScript enviado ao cliente: componentes de servidor não precisam ser enviados para execução no browser.
+Melhor SEO: o conteúdo da página já está disponível no HTML inicial.
+Maior segurança: chamadas de API e lógica de acesso a dados podem permanecer no servidor.
+No projeto, a rota /explorar utiliza um Server Component para chamar a função de busca da API e passar os dados para os componentes de interface, como o recipeGrid.
 
-# Entregáveis
-1. Instruções para rodar o projeto localmente (`npm run dev`).
-2. Nome e link da API utilizada.
-3. Resposta das perguntas de reflexão.
+- Atualmente, o RecipeCard é um Client Component, então a funcionalidade de Curtir/Favoritar é adicionada nele utilizando estados do React. Entretanto, pensando em escalabilidade e performance, uma melhoria seria separar essa interação em um componente cliente independente, mantendo os cards como componentes de servidor e enviando para o navegador apenas a parte que necessita de interatividade.
 
-# Getting Started
+- No projeto, o useState e useEffect foram utilizados em componentes que precisam de comportamento no cliente.
+useState é utilizado para armazenar valores que podem mudar durante a interação do usuário, como:
+texto digitado na busca;
+estado de filtros;
+página atual da paginação.
+Quando o estado muda através do setPagina, o React realiza uma nova renderização do componente para atualizar a interface. O useEffect é utilizado para executar ações após a renderização, como chamadas de API ou sincronização de dados. Ele evita executar determinados códigos em todas as renderizações, permitindo controlar quando uma ação deve acontecer.
 
-First, run the development server:
+- O projeto utiliza principalmente o método: GET
+O método GET foi utilizado para buscar as receitas da API externa: fetch("https://dummyjson.com/recipes")
+Ele é adequado porque a aplicação funciona como uma vitrine, onde o usuário apenas consulta informações.
+O GET é utilizado porque:
+   - não altera dados no servidor;
+   - é seguro para consultas;
+   - permite carregar informações dinamicamente.
 
-```bash
+- Algumas informações foram centralizadas para evitar repetição e facilitar manutenção. Por exemplo, a URL da API foi armazenada em uma constante:
+const API_URL = "https://dummyjson.com";
+Assim, caso a API fosse alterada futuramente, seria necessário modificar apenas um local. Também foi utilizada uma organização por arquivos:
+```
+src/
+ ├── services/
+ │    └── api.ts
+ │
+ ├── types/
+ │    └── recipe.ts
+```
+O arquivo de serviço concentra a lógica de comunicação com a API, enquanto os tipos centralizam as estruturas dos dados.
+
+- A aplicação utiliza design responsivo através do Tailwind CSS. Foram utilizados:
+  - Grid responsivo: grid-cols-1 md:grid-cols-2 lg:grid-cols-4
+     celular → 1 coluna;
+     tablet → 2 colunas;
+     desktop → 4 colunas.
+  - Classes responsivas do Tailwind, que aplicam estilos diferentes conforme o tamanho da tela:
+     text-sm md:text-base lg:text-xl
+     Layout flexível com:
+     display: flex;
+     display: grid;
+permitindo que os elementos se reorganizem conforme o espaço disponível.
+
+- O filtro de pesquisa é aplicado através do parâmetro search, enviado pela URL. O componente SearchBar adiciona esse parâmetro na rota /explorar, e o Server Component recebe esse valor através de searchParams. Esse valor é enviado para a função getRecipes, que utiliza o endpoint de busca da API (/recipes/search?q=). Dessa forma, o filtro é realizado pela API sobre o conjunto de receitas disponíveis, e não apenas sobre os itens já carregados na página atual.
+
+- API pública utilizada: DummyJSON "https://dummyjson.com".
+
+# Como rodar o projeto localmente
+
+Primeiro, baixe o repositório na sua máquina e indique a pasta com os comandos no terminal (isso é necessário pois o projeto foi criado dentro de outra pasta):
+```
+cd next-recipe
+# and
+dir
+```
+Segundo, rode o servidor de desenvolvimento no terminal com os comandos:
+
+```
 npm run dev
 # or
 yarn dev
@@ -53,27 +99,7 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
+Terceiro, abra [http://localhost:3000](http://localhost:3000) com seu navegador e veja o resultado.
 
 # Tecnologias Utilizadas
 
