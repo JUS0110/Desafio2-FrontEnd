@@ -49,3 +49,19 @@ export async function getRecipes(
   return response.json();
 
 }
+
+export async function getRecipe(id: number) {
+
+  const response = await fetch(
+    `https://dummyjson.com/recipes/${id}`,
+    {
+      cache: "no-store",
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Erro ao buscar receita.");
+  }
+
+  return response.json();
+}

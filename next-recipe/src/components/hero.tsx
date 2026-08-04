@@ -1,24 +1,42 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="flex flex-col items-center justify-center text-center py-24">
+    <section className="relative h-150 overflow-hidden">
 
-      <h1 className="text-6xl font-bold mb-6">
-        A sua próxima receita está aqui! 🍳
-      </h1>
+      {/* Imagem de fundo */}
+      <Image
+        src="/imagens/banner-hero.jpg"
+        alt="Mesa com diversas comidas"
+        fill
+        priority
+        className="object-cover"
+      />
 
-      <p className="text-xl max-w-xl mb-8">
-        Explore centenas de receitas, descubra novos sabores
-        e salve suas favoritas.
-      </p>
+      {/* Camada escura */}
+      <div className="absolute inset-0 bg-black/50" />
 
-      <Link
-        href="/explorar"
-        className="bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600"
-      >
-        Explorar receitas
-      </Link>
+      {/* Conteúdo */}
+      <div className="relative z-10 flex h-full flex-col items-center justify-center text-center px-6 text-white">
+
+        <h1 className="mb-6 text-6xl font-bold">
+          A sua próxima receita está aqui!
+        </h1>
+
+        <p className="mb-8 max-w-2xl text-xl">
+          Explore centenas de receitas, descubra novos sabores
+          e salve suas favoritas.
+        </p>
+
+        <Link
+          href="/explorar"
+          className="rounded-lg bg-orange-500 px-6 py-3 text-white transition hover:bg-orange-600"
+        >
+          Explorar receitas
+        </Link>
+
+      </div>
 
     </section>
   );
