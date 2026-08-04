@@ -12,7 +12,7 @@ type ExplorarProps = {
 
 export default async function Explorar({
   searchParams,
-}: ExplorarProps) {
+}: ExplorarProps) {  //server component
   const params = await searchParams;
 
   const page = Number(params.page ?? "1");
@@ -21,8 +21,9 @@ export default async function Explorar({
 
 
 
-  const data = await getRecipes(
+ const data = await getRecipes(
   page,
+  undefined,
   search
 );
 
