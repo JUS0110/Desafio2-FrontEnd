@@ -101,6 +101,9 @@ bun dev
 
 Terceiro, abra [http://localhost:3000](http://localhost:3000) com seu navegador e veja o resultado.
 
+# Observações
+O NextRecipe possui uma página de favoritos apenas como uma funcionalidade extra do desafio, mas para uma aplicação real isso não faz sentido sem uma conta e login. Portanto, como o projeto tem fins educativos, vamos abstrair esse detalhe por enquanto até que novas atualizações sejam feitas.
+
 # Tecnologias Utilizadas
 
 ![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
