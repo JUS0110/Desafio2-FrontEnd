@@ -1,5 +1,5 @@
 <p align="left">
-  <img src="https://img.shields.io/badge/Status-Em%20Desenvolvimento-F4A261?style=for-the-badge">
+  <img src="https://img.shields.io/badge/Status-%20Concluído-F4A261?style=for-the-badge">
   <img src="https://img.shields.io/badge/Licença-MIT-8D6E63?style=for-the-badge">
   <img width="1510" height="678" alt="Captura de tela 2026-08-04 210606" src="https://github.com/user-attachments/assets/79fd15d7-c0c8-4cc3-a222-609b54202a68" />
 </p>
@@ -8,7 +8,7 @@
 
 Desenvolvimento de um site de receitas para o desafio 2 do Onboarding de projetos da Seed a Bit Tecnologia.
 
-# Estrutura básica do projeto
+# Estrutura básica proposta pelo desafio
 ```
 app/
 ├── layout.tsx         # Layout global com Header e Footer
@@ -57,10 +57,10 @@ Assim, caso a API fosse alterada futuramente, seria necessário modificar apenas
 ```
 src/
  ├── services/
- │    └── api.ts
+ │    └── recipes.ts   --> API
  │
  ├── types/
- │    └── recipe.ts
+ │    └── recipe.ts    --> Estruturas dos dados
 ```
 O arquivo de serviço concentra a lógica de comunicação com a API, enquanto os tipos centralizam as estruturas dos dados.
 
